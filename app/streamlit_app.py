@@ -137,10 +137,12 @@ if st.sidebar.button("🚀 Process Invoices"):
             rwc_run_pipeline_batch_write()
             summary, styled, total, relevant = rwc_validate_invoices()
             output = RWC_EXCEL_OUTPUT
+            VENDOR = "RWC"
         elif selected_option == "Novolex Milton":
             novolex_run_pipeline_batch_write()
             summary, styled, total, relevant = novolex_validate_invoices()
             output = NOVOLEX_EXCEL_OUTPUT
+            VENDOR = "Novolex Milton"
 
         # Save to session state
         st.session_state.pipeline_run = True
@@ -149,6 +151,7 @@ if st.sidebar.button("🚀 Process Invoices"):
         st.session_state.styled = styled
         st.session_state.total = total
         st.session_state.relevant = relevant
+        st.session_state.vendor = VENDOR
 
     # Display results if pipeline has been run
     if st.session_state.pipeline_run:
@@ -157,7 +160,7 @@ if st.sidebar.button("🚀 Process Invoices"):
         st.download_button(
             label="Download Excel Report",
             data=st.session_state.excel_output.read_bytes(),
-            file_name="filled_invoice.xlsx",
+            file_name=f"utility_bill_{VENDOR}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         )
     
