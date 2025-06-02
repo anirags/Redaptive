@@ -37,8 +37,16 @@ def style_validation_table(row, comparison_df, columns_to_compare):
 # --------------------------
 def novolex_validate_invoices():
 
-    pred = pd.read_excel('../filled_invoice_novolex.xlsx', header=1)
-    actual = pd.read_excel('../novolex_validation_data.xlsx', header=1)
+    # pred = pd.read_excel('../filled_invoice_novolex.xlsx', header=1)
+    # Construct an absolute path from the script
+    base_dir = os.path.dirname(os.path.dirname(__file__))  # goes up from app/
+    file_path = os.path.join(base_dir, 'filled_invoice_novolex.xlsx')
+    pred = pd.read_excel(file_path, header=1)
+
+    base_dir = os.path.dirname(os.path.dirname(__file__))  # goes up from app/
+    file_path = os.path.join(base_dir, 'novolex_validation_data.xlsx')
+    actual = pd.read_excel(file_path, header=1)
+    # actual = pd.read_excel('../novolex_validation_data.xlsx', header=1)
 
     actual['Billing Date '] = pd.to_datetime(actual['Billing Date '], format='%d/%m/%Y')
     actual['Billing Date '] = actual['Billing Date '].dt.strftime('%m/%d/%y')
