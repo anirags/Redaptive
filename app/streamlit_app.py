@@ -54,7 +54,7 @@ def style_dataframe(df):
 
 
 st.set_page_config(
-    page_title="Invoice KPI Extractor",
+    page_title="Utility Bill Analysis",
     page_icon=":person_in_tuxedo:",
     layout="wide",
 )
@@ -97,7 +97,7 @@ background-color: lightblue;
 </style>
 """
 # App Title
-st.subheader("📄 Invoice KPI Extractor ")
+st.subheader("📄 Utility Bill Analysis ")
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
 
