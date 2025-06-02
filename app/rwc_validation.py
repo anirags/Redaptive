@@ -36,8 +36,18 @@ def style_validation_table(row, comparison_df, columns_to_compare):
 
 def rwc_validate_invoices():
 
-    pred = pd.read_excel('../filled_invoice_rwc.xlsx', header=1)
-    actual = pd.read_excel('../rwc_validation_data.xlsx', header=1)
+    # pred = pd.read_excel('../filled_invoice_rwc.xlsx', header=1)
+    # Construct an absolute path from the script
+    base_dir = os.path.dirname(os.path.dirname(__file__))  # goes up from app/
+    file_path = os.path.join(base_dir, 'filled_invoice_rwc.xlsx')
+    pred = pd.read_excel(file_path, header=1)
+
+    base_dir = os.path.dirname(os.path.dirname(__file__))  # goes up from app/
+    file_path = os.path.join(base_dir, 'rwc_validation_data.xlsx')
+    actual = pd.read_excel(file_path, header=1)
+
+    
+    # actual = pd.read_excel('../rwc_validation_data.xlsx', header=1)
 
     pred['Billing Date '] = pd.to_datetime(pred['Billing Date ']).dt.strftime('%m/%d/%y')
     pred['Billing Date '] = pred['Billing Date '].str.replace(r'^0', '', regex=True)  # Remove leading zero from month
