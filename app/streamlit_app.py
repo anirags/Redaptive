@@ -10,6 +10,7 @@ from io import BytesIO
 import os
 from rwc_validation import rwc_validate_invoices
 from novolex_validation import novolex_validate_invoices
+import time
 
 if "pipeline_run" not in st.session_state:
     st.session_state.pipeline_run = False
@@ -130,6 +131,7 @@ with st.sidebar:
 # Process Invoices
 if st.sidebar.button("🚀 Process Invoices"):
     with st.spinner("Processing all invoices..."):
+        time.sleep(10)
         selected_option = st.session_state.selected_option
         if selected_option == "RWC":
             rwc_run_pipeline_batch_write()
