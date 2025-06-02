@@ -153,28 +153,28 @@ if st.sidebar.button("🚀 Process Invoices"):
         st.session_state.relevant = relevant
         st.session_state.vendor = VENDOR
 
-    # Display results if pipeline has been run
-    if st.session_state.pipeline_run:
-        st.success("✅ Invoices processed successfully! Download the report below.")
-    
-        st.download_button(
-            label="Download Excel Report",
-            data=st.session_state.excel_output.read_bytes(),
-            file_name=f"utility_bill_{VENDOR}.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        )
-    
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Total Invoices", st.session_state.total)
-        with col2:
-            st.metric("Total Relevant Entities", st.session_state.relevant)
-    
-        st.subheader("Validation Report Summary")
-        st.dataframe(st.session_state.summary, use_container_width=True, height=100)
-    
-        st.subheader("Detailed Validation Table")
-        st.dataframe(st.session_state.styled, use_container_width=True, height=500, hide_index=True)
+# Display results if pipeline has been run
+if st.session_state.pipeline_run and st.session_state.selected_option == st.session_state.vendor:
+    st.success("✅ Invoices processed successfully! Download the report below.")
+
+    st.download_button(
+        label="Download Excel Report",
+        data=st.session_state.excel_output.read_bytes(),
+        file_name=f"utility_bill_{st.session_state.vendor}.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Total Invoices", st.session_state.total)
+    with col2:
+        st.metric("Total Relevant Entities", st.session_state.relevant)
+
+    st.subheader("Validation Report Summary")
+    st.dataframe(st.session_state.summary, use_container_width=True, height=100)
+
+    st.subheader("Detailed Validation Table")
+    st.dataframe(st.session_state.styled, use_container_width=True, height=500, hide_index=True)
         # Display the styled validation table
 # # ---------------------------------------------------------
 # if st.sidebar.button("🚀 Process Invoices"):
