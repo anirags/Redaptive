@@ -163,7 +163,7 @@ if st.sidebar.button("🚀 Process Invoices"):
     
         col1, col2 = st.columns(2)
         with col1:
-            st.metric("Total Entities (Invoices)", st.session_state.total)
+            st.metric("Total Invoices", st.session_state.total)
         with col2:
             st.metric("Total Relevant Entities", st.session_state.relevant)
     
